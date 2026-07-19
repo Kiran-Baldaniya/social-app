@@ -37,6 +37,7 @@ import * as Prompt from '#/components/Prompt'
 import {RichText} from '#/components/RichText'
 import * as Toast from '#/components/Toast'
 import {useAnalytics} from '#/analytics'
+import {useBrand} from '#/brand/context'
 import {IS_IOS, IS_NATIVE} from '#/env'
 import {InviteFriendsDialog} from '#/features/inviteFriends'
 import {useActorStatus} from '#/features/liveNow'
@@ -67,6 +68,7 @@ let ProfileHeaderStandard = ({
     useProfileShadow<AppBskyActorDefs.ProfileViewDetailed>(profileUnshadowed)
   const {currentAccount} = useSession()
   const {_} = useLingui()
+  const brand = useBrand()
   const moderation = useMemo(
     () => moderateProfile(profile, moderationOpts),
     [profile, moderationOpts],
@@ -193,11 +195,13 @@ let ProfileHeaderStandard = ({
         />
       </ProfileHeaderShell>
 
-      <ProfileHeaderSuggestedFollows
-        isExpanded={!hasSeenAllSuggestedFollows && showSuggestedFollows}
-        actorDid={profile.did}
-        onRequestHide={onRequestHide}
-      />
+      {brand.features.showSuggestedFollows && (
+        <ProfileHeaderSuggestedFollows
+          isExpanded={!hasSeenAllSuggestedFollows && showSuggestedFollows}
+          actorDid={profile.did}
+          onRequestHide={onRequestHide}
+        />
+      )}
     </>
   )
 }

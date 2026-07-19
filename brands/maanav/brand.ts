@@ -149,6 +149,7 @@ const brand: Brand = {
     showStarterPacks: true,
     showLiveNow: true,
     showTrending: false,
+    showSuggestedFollows: false,
   },
 
   palette: {

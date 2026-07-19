@@ -553,10 +553,12 @@ let PostFeed = ({
                       })
                     }
                   } else if (sliceIndex === 30) {
-                    arr.push({
-                      type: 'interstitialFollows',
-                      key: 'interstitial-' + sliceIndex + '-' + lastFetchedAt,
-                    })
+                    if (brand.features.showSuggestedFollows) {
+                      arr.push({
+                        type: 'interstitialFollows',
+                        key: 'interstitial-' + sliceIndex + '-' + lastFetchedAt,
+                      })
+                    }
                   }
                 } else if (feedKind === 'following') {
                   if (sliceIndex === 0) {
@@ -569,7 +571,7 @@ let PostFeed = ({
                     }
                   }
                 } else if (feedKind === 'profile') {
-                  if (sliceIndex === 5) {
+                  if (sliceIndex === 5 && brand.features.showSuggestedFollows) {
                     arr.push({
                       type: 'interstitialFollows',
                       key: 'interstitial-' + sliceIndex + '-' + lastFetchedAt,
